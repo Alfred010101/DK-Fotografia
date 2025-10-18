@@ -1,0 +1,3 @@
+CREATE DATABASE dk_fotografia;
+
+#SHOW DATABASES;
