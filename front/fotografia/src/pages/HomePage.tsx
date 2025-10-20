@@ -5,11 +5,11 @@ const HomePage = () => {
   return (
     <Container maxWidth="md" sx={{ mt: 8, textAlign: "center" }}>
       <Typography variant="h3" gutterBottom>
-        Bienvenido a la Tienda Virtual 👕
+        Bienvenido a DK Fotografia
       </Typography>
 
       <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-        Personaliza, compra y gestiona tus productos fácilmente.
+        Adquiere tu paquete fotografico con nosotros.
       </Typography>
 
       <Box display="flex" justifyContent="center" gap={2}>

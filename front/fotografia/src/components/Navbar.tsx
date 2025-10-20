@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -21,7 +20,10 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#e0e0e0", color: "#000000" }}
+    >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* Logo o título */}
         <Typography
@@ -35,13 +37,22 @@ export default function Navbar() {
             letterSpacing: 0.5,
           }}
         >
-          Mi Tienda
+          DK Fotografia
         </Typography>
 
         {/* Botones de navegación */}
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
           <Button color="inherit" component={Link} to="/">
-            Productos
+            Inicio
+          </Button>
+          <Button color="inherit" component={Link} to="/packages">
+            Paquetes
+          </Button>
+          <Button color="inherit" component={Link} to="/portafolio">
+            Portaforio
+          </Button>
+          <Button color="inherit" component={Link} to="/about">
+            Sobre nosotros
           </Button>
 
           {user ? (

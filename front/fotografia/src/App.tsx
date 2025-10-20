@@ -4,7 +4,11 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { PublicRoute } from "./routes/PublicRoute";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
+import PackagesPage from "./pages/PackagesPage";
+import PortafolioPage from "./pages/PortafolioPage";
+import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
@@ -13,10 +17,13 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          {/* Página accesible a todos */}
+          {/* Páginas accesibles para todos */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/portafolio" element={<PortafolioPage />} />
+          <Route path="/about" element={<AboutPage />} />
 
-          {/* Solo visible si NO estás logueado */}
+          {/* Solo visible si NO esta logueado */}
           <Route
             path="/login"
             element={
@@ -26,7 +33,16 @@ function App() {
             }
           />
 
-          {/* Solo visible si estás logueado */}
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
+
+          {/* Solo visible si esta logueado */}
           <Route
             path="/profile"
             element={

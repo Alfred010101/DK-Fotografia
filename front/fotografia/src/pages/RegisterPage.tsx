@@ -10,10 +10,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,24 +22,26 @@ const LoginPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email || !password) {
+    if (!name || !email || !password) {
       setError("Todos los campos son obligatorios");
       return;
     }
-    // if (email === "user@example.com" && password === "123456") {
-    //   const loggedUser = { id: 1, name: "Usuario Demo", email };
-    //   login(loggedUser, "fake-jwt-token");
-    //   navigate("/profile"); // Redirige al perfil
-    // } else {
-    //   setError("Correo o contraseña incorrectos");
-    // }
+
+    // PI de registro
+    const newUser = { id: Date.now(), name, email };
+
+    // Guardamos en contexto y localStorage
+    login(newUser, "fake-jwt-token");
+
+    // Redirige al home o perfil
+    navigate("/profile");
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Typography variant="h4" gutterBottom textAlign="center">
-          Iniciar Sesión
+          Registro
         </Typography>
 
         {error && (
@@ -52,6 +55,14 @@ const LoginPage = () => {
           onSubmit={handleSubmit}
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
+          <TextField
+            label="Nombre completo"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            fullWidth
+            required
+          />
+
           <TextField
             label="Correo electrónico"
             type="email"
@@ -71,7 +82,7 @@ const LoginPage = () => {
           />
 
           <Button type="submit" variant="contained" color="primary" fullWidth>
-            Iniciar Sesión
+            Registrarse
           </Button>
         </Box>
       </Paper>
@@ -79,4 +90,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
