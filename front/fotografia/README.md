@@ -18,3 +18,7 @@ Instalar Material UI:
 npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 ```
 
+Correr proyecto:
+```bash
+npm run dev
+```
