@@ -47,11 +47,11 @@ public class AuthService
         );
     }
 
-    public AuthResponse register(RegisterRequest request) 
+    public ResponseEntity<?> register(RegisterRequest request) 
     {
         if (userRepository.existsByUsername(request.getUsername())) 
         {
-            throw new RuntimeException("El usuario ya existe");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe");
         }
 
         UserModel user = UserModel.builder()
@@ -62,10 +62,11 @@ public class AuthService
             .role(RoleModel.CUSTOMER)
             .build();
 
-        userService.createUser(user);
+        userService.save(user);
 
-        return AuthResponse.builder()
+        return ResponseEntity.ok(AuthResponse.builder()
             .token(jwtService.getToken(user))
-            .build();
+            .build()
+        );
     }
 }

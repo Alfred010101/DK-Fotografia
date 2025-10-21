@@ -35,7 +35,6 @@ public class SecurityConfig
             .authorizeHttpRequests(authRequest -> authRequest
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/imgs/**").permitAll()
-                .requestMatchers("/api/tshirts/**").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/user/**").hasAnyRole("CUSTOMER", "ADMIN") 
                 .anyRequest().authenticated()

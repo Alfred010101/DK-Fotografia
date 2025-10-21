@@ -12,15 +12,16 @@ public class UserService
 {
     private final UserRepository userRepository;
 
-    public void createUser(UserModel user)
+    public UserModel save(UserModel user)
     {
         UserModel userSaved = userRepository.save(user);
         System.out.println(userSaved);
+        return userSaved;
     }
 
     public Optional<UserModel> findByEmail(String email)
     {
-        return userRepository.findByEmail(email);
+        return userRepository.findByUsername(email);
     }
 
 }
