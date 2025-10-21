@@ -3,9 +3,10 @@ import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
 interface User {
-  id: number;
-  name: string;
-  email: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  role:string;
 }
 
 interface AuthContextType {
@@ -19,7 +20,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  // Cargar sesión al inicio
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) setUser(JSON.parse(savedUser));

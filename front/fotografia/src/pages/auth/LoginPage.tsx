@@ -8,40 +8,57 @@ import {
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!username || !password) {
       setError("Todos los campos son obligatorios");
       return;
     }
 
-    // PI de registro
-    const newUser = { id: Date.now(), name, email };
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-    // Guardamos en contexto y localStorage
-    login(newUser, "fake-jwt-token");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Error en el registro");
+      }
 
-    // Redirige al home o perfil
-    navigate("/profile");
+      const data = await response.json();
+
+      login(
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          username: data.username,
+          role: data.role,
+        }, data.token
+      );
+      navigate("/");
+    } catch (err: any) {
+      setError(err.message || "Ocurrió un error al logear");
+    }
   };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Typography variant="h4" gutterBottom textAlign="center">
-          Registro
+          Iniciar Sesión
         </Typography>
 
         {error && (
@@ -56,18 +73,10 @@ const RegisterPage = () => {
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
           <TextField
-            label="Nombre completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            fullWidth
-            required
-          />
-
-          <TextField
             label="Correo electrónico"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             fullWidth
             required
           />
@@ -82,7 +91,7 @@ const RegisterPage = () => {
           />
 
           <Button type="submit" variant="contained" color="primary" fullWidth>
-            Registrarse
+            Iniciar Sesión
           </Button>
         </Box>
       </Paper>
@@ -90,4 +99,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

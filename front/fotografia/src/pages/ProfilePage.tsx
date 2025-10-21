@@ -14,10 +14,10 @@ const ProfilePage = () => {
           <>
             <Box sx={{ mt: 2, mb: 4 }}>
               <Typography variant="h6">
-                <strong>Nombre:</strong> {user.name}
+                <strong>Nombre:</strong> {user.firstName + " " + user.lastName}
               </Typography>
               <Typography variant="h6">
-                <strong>Email:</strong> {user.email}
+                <strong>Email:</strong> {user.username}
               </Typography>
             </Box>
 

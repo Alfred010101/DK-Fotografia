@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
-public class UserController {
-
+public class UserController 
+{
     private final UserService userService;
 
     @PostMapping

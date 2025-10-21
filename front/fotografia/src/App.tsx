@@ -7,8 +7,8 @@ import HomePage from "./pages/HomePage";
 import PackagesPage from "./pages/PackagesPage";
 import PortafolioPage from "./pages/PortafolioPage";
 import AboutPage from "./pages/AboutPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
@@ -19,7 +19,6 @@ function App() {
         <Routes>
           {/* Páginas accesibles para todos */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/packages" element={<PackagesPage />} />
           <Route path="/portafolio" element={<PortafolioPage />} />
           <Route path="/about" element={<AboutPage />} />
 
@@ -32,7 +31,6 @@ function App() {
               </PublicRoute>
             }
           />
-
           <Route
             path="/register"
             element={
@@ -51,6 +49,13 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route 
+            path="/packages" 
+            element={
+              <ProtectedRoute>
+                <PackagesPage />
+              </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

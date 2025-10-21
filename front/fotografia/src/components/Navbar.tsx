@@ -45,9 +45,15 @@ export default function Navbar() {
           <Button color="inherit" component={Link} to="/">
             Inicio
           </Button>
-          <Button color="inherit" component={Link} to="/packages">
-            Paquetes
-          </Button>
+
+          {user ? ( 
+            <>
+              <Button color="inherit" component={Link} to="/packages">
+                Paquetes
+              </Button>
+            </> ):(<></>)
+          }
+          
           <Button color="inherit" component={Link} to="/portafolio">
             Portaforio
           </Button>

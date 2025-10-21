@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +39,16 @@ public class AuthService
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }
 
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        UserModel user = userRepository.findByUsername(request.getUsername())
+        .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+
 
         return ResponseEntity.ok(AuthResponse.builder()
             .token(jwtService.getToken(user))
+            .username(user.getUsername())
+            .firstName(user.getFirstName())
+            .lastName(user.getLastName())
+            .role(user.getRole().name())
             .build()
         );
     }
@@ -66,6 +72,7 @@ public class AuthService
 
         return ResponseEntity.ok(AuthResponse.builder()
             .token(jwtService.getToken(user))
+            .role(user.getRole().name())
             .build()
         );
     }
