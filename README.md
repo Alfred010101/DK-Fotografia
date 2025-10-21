@@ -47,7 +47,7 @@ Este proyecto busca ofrecer una solución completa para negocios dedicados a la 
 - Git
 
 
-**Intrucciones para correr el front-end**
+**Intrucciones para deaplegar el front-end**
 ```bash
 cd front/fotografia
 npm install
@@ -57,7 +57,7 @@ npm install
 npm run dev
 ```
 
-**Intrucciones para correr el back-end**
+**Intrucciones para deaplegar el back-end**
 ```bash
 cd back/fotografia
 ./gradlew bootRun   
