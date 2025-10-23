@@ -149,7 +149,7 @@ const AboutPage: React.FC = () => {
                   borderRadius: 3,
                   boxShadow: 3,
                   width: 250,
-                  height: 320,
+                  height: 230,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
