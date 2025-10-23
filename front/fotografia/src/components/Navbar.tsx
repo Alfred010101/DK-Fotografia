@@ -64,7 +64,7 @@ export default function Navbar() {
 
           {user ? (
             <>
-              <IconButton color="inherit" component={Link} to="/cart">
+              <IconButton color="inherit" component={Link} to="/shopping">
                 <LocalMallIcon />
               </IconButton>
 
