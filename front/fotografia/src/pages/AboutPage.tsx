@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import GroupIcon from "@mui/icons-material/Group";
+import Footer from "../components/Footer";
 
 const teamMembers = [
   { name: "Ana Pérez", role: "Fotógrafa principal", img: "/team1.jpg" },
@@ -19,45 +21,50 @@ const teamMembers = [
 
 const AboutPage: React.FC = () => {
   return (
-    <Box
-      sx={{
-        background: "linear-gradient(to bottom, #fdf6f0, #ffffff)",
-        minHeight: "100vh",
-        py: 8,
-      }}
-    >
+    <Box sx={{ pt: 4 }}>
       <Container>
-        {/* Título principal */}
-        <Typography
-          variant="h3"
-          align="center"
-          fontWeight="bold"
-          gutterBottom
-          sx={{ color: "#333" }}
-        >
-          Acerca de Nosotros
-        </Typography>
-
-        <Typography
-          variant="body1"
-          align="center"
-          sx={{ mb: 8, color: "#555", maxWidth: 700, mx: "auto" }}
-        >
-          Somos un equipo apasionado por la fotografía de eventos. Capturamos momentos
-          únicos con creatividad y profesionalismo, asegurando que cada recuerdo perdure
-          para siempre.
-        </Typography>
-
         {/* Sección de misión y visión */}
-        <Grid container spacing={6} sx={{ mb: 8 }}>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={6} sx={{ mb: 8 }} justifyContent="center">
+          <Grid item>
             <Card
               sx={{
-                height: "100%",
+                height: 150,
+                width: 1000,
                 borderRadius: 3,
-                boxShadow: 4,
-                transition: "0.3s",
-                "&:hover": { transform: "translateY(-5px)", boxShadow: 8 },
+                boxShadow: 3,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                transition: "none",
+              }}
+            >
+              <CardContent>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                  <GroupIcon sx={{ fontSize: 40, color: "#ff9800", mr: 2 }} />
+                  <Typography variant="h5" fontWeight="bold">
+                    Sobre Nosotros
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  Somos un equipo apasionado por la fotografía de eventos. Capturamos momentos
+                  únicos con creatividad y profesionalismo, asegurando que cada recuerdo perdure
+                  para siempre.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item>
+            <Card
+              sx={{
+                height: 150,
+                width: 1000,
+                borderRadius: 3,
+                boxShadow: 3,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                transition: "none",
               }}
             >
               <CardContent>
@@ -75,14 +82,17 @@ const AboutPage: React.FC = () => {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid item>
             <Card
               sx={{
-                height: "100%",
+                height: 150,
+                width: 1000,
                 borderRadius: 3,
-                boxShadow: 4,
-                transition: "0.3s",
-                "&:hover": { transform: "translateY(-5px)", boxShadow: 8 },
+                boxShadow: 3,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                transition: "none",
               }}
             >
               <CardContent>
@@ -101,6 +111,7 @@ const AboutPage: React.FC = () => {
           </Grid>
         </Grid>
 
+
         {/* Sección de equipo */}
         <Typography
           variant="h4"
@@ -112,25 +123,51 @@ const AboutPage: React.FC = () => {
           Nuestro Equipo
         </Typography>
 
-        <Grid container spacing={4} justifyContent="center">
+        <Grid
+          container
+          spacing={4}
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            flexWrap: "wrap",
+            maxWidth: "1200px",
+            mx: "auto",
+          }}
+        >
           {teamMembers.map((member) => (
-            <Grid item xs={12} sm={6} md={4} key={member.name}>
+            <Grid
+              item
+              key={member.name}
+              xs={12}
+              sm={6}
+              md={3}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <Card
                 sx={{
                   textAlign: "center",
                   borderRadius: 3,
-                  boxShadow: 4,
-                  transition: "0.3s",
-                  "&:hover": { transform: "translateY(-5px)", boxShadow: 8 },
+                  boxShadow: 3,
+                  width: 250,
+                  height: 320,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                   py: 4,
                 }}
               >
                 <Avatar
                   src={member.img}
                   alt={member.name}
-                  sx={{ width: 120, height: 120, mx: "auto", mb: 2 }}
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    mb: 2,
+                    border: "3px solid #f5f5f5",
+                  }}
                 />
-                <Typography variant="h6" fontWeight="bold">
+                <Typography variant="h6" fontWeight="bold" color="text.primary">
                   {member.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -140,7 +177,11 @@ const AboutPage: React.FC = () => {
             </Grid>
           ))}
         </Grid>
+
       </Container>
+
+      <Footer />
+
     </Box>
   );
 };
