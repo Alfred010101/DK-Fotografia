@@ -19,7 +19,8 @@ function App() {
         <Routes>
           {/* Páginas accesibles para todos */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/portafolio" element={<PortafolioPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/portfolio" element={<PortafolioPage />} />
           <Route path="/about" element={<AboutPage />} />
 
           {/* Solo visible si NO esta logueado */}
@@ -49,13 +50,13 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route 
-            path="/packages" 
+          <Route
+            path="/packages"
             element={
               <ProtectedRoute>
                 <PackagesPage />
               </ProtectedRoute>
-          } />
+            } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -14,9 +14,9 @@ import GroupIcon from "@mui/icons-material/Group";
 import Footer from "../components/Footer";
 
 const teamMembers = [
-  { name: "Ana Pérez", role: "Fotógrafa principal", img: "/team1.jpg" },
-  { name: "Luis Gómez", role: "Editor creativo", img: "/team2.jpg" },
-  { name: "Carla Ruiz", role: "Asistente de producción", img: "/team3.jpg" },
+  { name: "Ana Pérez", role: "Fotógrafa principal", img: "https://i.pinimg.com/736x/94/55/72/94557248162d6bb98fcbe1af70f00a12.jpg" },
+  { name: "Luis Gómez", role: "Editor creativo", img: "https://images.squarespace-cdn.com/content/v1/686720b63029cc249e2ef752/85da49c0-f06d-4d55-af56-c6520343c5ba/foto-match-eras-residentado.jpg" },
+  { name: "Carla Ruiz", role: "Asistente de producción", img: "https://media.istockphoto.com/id/1289220949/es/foto/mujer-sonriente-exitosa-con-gafas-en-la-pared-gris.jpg?s=612x612&w=0&k=20&c=vH5cbmaJoJHJ_BWv9IBF1wri-4GwbhGrmJVcGcEhkCk=" },
 ];
 
 const AboutPage: React.FC = () => {

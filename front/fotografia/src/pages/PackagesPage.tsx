@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const PackagesPage: React.FC = () => {
   return (
     <>
-      <Box sx={{ py: 8, px: { xs: 2, md: 8 }, backgroundColor: "#fafafa", minHeight: "100vh" }}>
+      <Box sx={{ py: 2, px: { xs: 2, md: 8 }, backgroundColor: "#fafafa", minHeight: "100vh" }}>
         <Typography variant="h3" align="center" fontWeight="bold" gutterBottom>
           Paquetes Fotográficos
         </Typography>

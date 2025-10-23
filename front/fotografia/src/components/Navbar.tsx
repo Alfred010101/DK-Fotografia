@@ -6,9 +6,10 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import { ShoppingCart, AccountCircle } from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -16,7 +17,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/home");
   };
 
   return (
@@ -46,15 +47,15 @@ export default function Navbar() {
             Inicio
           </Button>
 
-          {user ? ( 
+          {user ? (
             <>
               <Button color="inherit" component={Link} to="/packages">
                 Paquetes
               </Button>
-            </> ):(<></>)
+            </>) : (<></>)
           }
-          
-          <Button color="inherit" component={Link} to="/portafolio">
+
+          <Button color="inherit" component={Link} to="/portfolio">
             Portaforio
           </Button>
           <Button color="inherit" component={Link} to="/about">
@@ -64,7 +65,7 @@ export default function Navbar() {
           {user ? (
             <>
               <IconButton color="inherit" component={Link} to="/cart">
-                <ShoppingCart />
+                <LocalMallIcon />
               </IconButton>
 
               <IconButton color="inherit" component={Link} to="/profile">

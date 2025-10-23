@@ -12,7 +12,7 @@ export const eventos: Event[] = [
     description:
       "Capturamos cada detalle de tu día especial con fotografías naturales y emotivas.",
     image:
-      "https://images.unsplash.com/photo-1529634891367-6a1b8e5e7e20?auto=format&fit=crop&w=800&q=60",
+      "https://traveler.marriott.com/es/wp-content/uploads/sites/2/2024/02/GettyImages-929904308-scaled.jpg",
   },
   {
     id: 2,

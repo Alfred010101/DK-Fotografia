@@ -48,8 +48,8 @@ export default function Footer() {
                         <Stack spacing={0.5}>
                             <Link href="/" color="grey.300" underline="hover">Inicio</Link>
                             <Link href="/packages" color="grey.300" underline="hover">Paquetes</Link>
-                            <Link href="/events" color="grey.300" underline="hover">Eventos</Link>
-                            <Link href="/contact" color="grey.300" underline="hover">Contacto</Link>
+                            <Link href="/portafolio" color="grey.300" underline="hover">Eventos</Link>
+                            <Link href="/about" color="grey.300" underline="hover">Contacto</Link>
                         </Stack>
                     </Box>
 

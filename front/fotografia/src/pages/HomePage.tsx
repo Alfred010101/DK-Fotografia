@@ -75,7 +75,7 @@ const Home: React.FC = () => {
               <Card
                 sx={{
                   width: 320,
-                  height: 420,
+                  height: 380,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -106,6 +106,7 @@ const Home: React.FC = () => {
                   <Typography
                     variant="body2"
                     color="text.secondary"
+                    textAlign={"justify"}
                   >
                     {e.description}
                   </Typography>
@@ -117,7 +118,7 @@ const Home: React.FC = () => {
       </Container>
 
       {/* Servicios */}
-      <Box sx={{ bgcolor: "#f9f9f9", py: 10 }}>
+      <Box sx={{ bgcolor: "#f9f9f9", py: 4 }}>
         <Container maxWidth="lg">
           <Typography
             variant="h4"
