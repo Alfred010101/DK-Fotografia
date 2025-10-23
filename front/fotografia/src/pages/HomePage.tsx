@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { eventos } from "../data/Events";
 import { servicios } from "../data/Services";
+import Footer from "../components/Footer";
 
 const Home: React.FC = () => {
 
@@ -63,24 +64,48 @@ const Home: React.FC = () => {
           Eventos Destacados
         </Typography>
 
-        <Grid container spacing={4}>
-          {eventos.map((e) => (
-            <Grid xs={12} sm={6} md={4}>
-              <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
+        <Grid
+          container
+          spacing={4}
+          justifyContent="center"
+          alignItems="stretch"
+        >
+          {eventos.map((e, index) => (
+            <Grid item key={index}>
+              <Card
+                sx={{
+                  width: 320,
+                  height: 420,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  borderRadius: 3,
+                  boxShadow: 3,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="200"
                   image={e.image}
                   alt={e.title}
+                  sx={{
+                    objectFit: "cover",
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                  }}
                 />
-                <CardContent>
-                  <Typography variant="h6" fontWeight="bold">
+
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography
+                    variant="h6"
+                    fontWeight="bold"
+                    gutterBottom
+                  >
                     {e.title}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="text.secondary"
-                    sx={{ mb: 2 }}
                   >
                     {e.description}
                   </Typography>
@@ -136,16 +161,8 @@ const Home: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Footer */}
-      <Box sx={{ bgcolor: "#222", color: "#fff", py: 2, textAlign: "center" }}>
-        <Typography variant="body1">
-          © {new Date().getFullYear()} DK Fotografía. Todos los derechos
-          reservados.
-        </Typography>
-        <Typography variant="body2" color="gray">
-          contacto@dkfotografia.com | @dkfotografia
-        </Typography>
-      </Box>
+      <Footer />
+
     </Box>
   );
 };
