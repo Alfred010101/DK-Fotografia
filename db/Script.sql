@@ -19,9 +19,35 @@ INSERT INTO dk_fotografia.user (first_name, last_name, username, password, role)
 		('Juan', 'Pérez', 'jperez', '$2a$10$XLnYmx/dV8f6ucgZpzDwE.PlvHW6CoB2duTzKcg0AZKDjLkXek0Fu', 'CUSTOMER'),
 		('Lucía', 'Martínez', 'luciam', '$2a$10$XLnYmx/dV8f6ucgZpzDwE.PlvHW6CoB2duTzKcg0AZKDjLkXek0Fu', 'CUSTOMER');
 
+
 SELECT * FROM dk_fotografia.`user`;
 
 #DROP DATABASE dk_fotografia;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
