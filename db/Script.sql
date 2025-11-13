@@ -12,6 +12,22 @@ CREATE TABLE IF NOT EXISTS dk_fotografia.user(
 	PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS dk_fotografia.event_purchase (
+    id INT AUTO_INCREMENT,
+    fk_user INT NOT NULL,
+    date DATE NOT NULL,
+    location VARCHAR(150) NOT NULL,
+    notes TEXT,
+    card_number VARCHAR(20) NOT NULL,
+    card_name VARCHAR(100) NOT NULL,
+    expiry VARCHAR(7) NOT NULL,
+    cvv VARCHAR(4) NOT NULL,
+    package_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(fk_user) REFERENCES dk_fotografia.user(id)    
+);
+
 INSERT INTO dk_fotografia.user (first_name, last_name, username, password, role)
 	VALUES
 		('Alfredo', 'Arista', 'alfredo_admin', '$2a$10$XLnYmx/dV8f6ucgZpzDwE.PlvHW6CoB2duTzKcg0AZKDjLkXek0Fu', 'ADMIN'),
@@ -23,6 +39,8 @@ INSERT INTO dk_fotografia.user (first_name, last_name, username, password, role)
 SELECT * FROM dk_fotografia.`user`;
 
 #DROP DATABASE dk_fotografia;
+
+#DROP TABLE dk_fotografia.event_purchase;
 
 
 
