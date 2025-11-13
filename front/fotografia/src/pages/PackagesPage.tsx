@@ -15,19 +15,19 @@ import {
 } from "@mui/material";
 import { packages } from "../data/Packages";
 import Footer from "../components/Footer";
+import { useAuth } from "../context/AuthContext";
 
-const steps = [
-  "Detalles del evento",
-  "Forma de pago",
-  "Confirmación",
-];
+const steps = ["Detalles del evento", "Forma de pago", "Confirmación"];
 
 const PackagesPage: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
 
+  const { user, token } = useAuth();
+
   const [formData, setFormData] = useState({
+    username: user?.username,
     date: "",
     location: "",
     notes: "",
@@ -35,10 +35,17 @@ const PackagesPage: React.FC = () => {
     cardName: "",
     expiry: "",
     cvv: "",
+    packageName: "",
+    price: 0,
   });
 
   const handleOpen = (pkg: any) => {
     setSelectedPackage(pkg);
+    setFormData((prev) => ({
+      ...prev,
+      packageName: pkg.title,
+      price: pkg.price,
+    }));
     setOpen(true);
     setActiveStep(0);
   };
@@ -52,11 +59,42 @@ const PackagesPage: React.FC = () => {
   const handleNext = () => setActiveStep((prev) => prev + 1);
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
-  const handleSubmit = () => {
-    console.log("Compra simulada:", { ...formData, selectedPackage });
-    setOpen(false);
-    alert("¡Compra simulada con éxito! Te contactaremos para confirmar tu sesión.");
+  const handleSubmit = async () => {
+    try {
+      if (!formData.date || !formData.location || !formData.cardNumber) {
+        alert("Por favor completa todos los campos obligatorios.");
+        return;
+      }
+
+      const response = await fetch("http://localhost:8080/api/v1/event/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...formData,
+          date: formData.date,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al guardar evento");
+      }
+
+      const data = await response.json();
+
+      console.log("EVENTO GUARDADO:", data);
+
+      alert("¡Compra exitosa! Te contactaremos para confirmar tu sesión.");
+      setOpen(false);
+
+    } catch (error) {
+      console.error(error);
+      alert("Ocurrió un error al procesar la compra.");
+    }
   };
+
 
   return (
     <>
@@ -195,60 +233,35 @@ const PackagesPage: React.FC = () => {
             </Box>
           )}
 
-          {/*Forma de pago */}
+          {/* Forma de pago */}
           {activeStep === 1 && (
             <Box display="flex" flexDirection="column" gap={2}>
               <Typography variant="subtitle1" fontWeight="bold">
                 Tarjeta de Crédito o Débito
               </Typography>
-              <TextField
-                label="Número de Tarjeta"
-                name="cardNumber"
-                value={formData.cardNumber}
-                onChange={handleChange}
-                placeholder="XXXX XXXX XXXX XXXX"
-              />
-              <TextField
-                label="Nombre en la Tarjeta"
-                name="cardName"
-                value={formData.cardName}
-                onChange={handleChange}
-                placeholder="Como aparece en la tarjeta"
-              />
+              <TextField label="Número de Tarjeta" name="cardNumber" value={formData.cardNumber} onChange={handleChange} placeholder="XXXX XXXX XXXX XXXX" />
+              <TextField label="Nombre en la Tarjeta" name="cardName" value={formData.cardName} onChange={handleChange} placeholder="Como aparece en la tarjeta" />
               <Box display="flex" gap={2}>
-                <TextField
-                  label="Expiración (MM/AA)"
-                  name="expiry"
-                  value={formData.expiry}
-                  onChange={handleChange}
-                  fullWidth
-                />
-                <TextField
-                  label="CVV"
-                  name="cvv"
-                  value={formData.cvv}
-                  onChange={handleChange}
-                  fullWidth
-                />
+                <TextField label="Expiración (MM/AA)" name="expiry" value={formData.expiry} onChange={handleChange} fullWidth />
+                <TextField label="CVV" name="cvv" value={formData.cvv} onChange={handleChange} fullWidth />
               </Box>
             </Box>
           )}
 
-          {/*Confirmación */}
+          {/* Confirmación */}
           {activeStep === 2 && (
             <Box>
               <Typography variant="body1" mb={2}>
                 Por favor, confirma los detalles de tu compra:
               </Typography>
-              <Typography><strong>Cliente:</strong> {null}</Typography>
-              <Typography><strong>Email:</strong> {null}</Typography>
-              <Typography><strong>Teléfono:</strong> {null}</Typography>
+              <Typography><strong>Cliente:</strong> {formData.firstName + " " + formData.lastName}</Typography>
+              <Typography><strong>Email:</strong> {formData.username}</Typography>
               <Typography><strong>Fecha:</strong> {formData.date}</Typography>
               <Typography><strong>Ubicación:</strong> {formData.location}</Typography>
               <Typography><strong>Tarjeta terminada en:</strong> ****{formData.cardNumber.slice(-4)}</Typography>
-              <Typography><strong>Paquete:</strong> {selectedPackage?.title}</Typography>
+              <Typography><strong>Paquete:</strong> {formData.packageName}</Typography>
               <Typography sx={{ mt: 2, fontWeight: "bold" }}>
-                Total: ${selectedPackage?.price.toLocaleString()} MXN
+                Total: ${formData.price.toLocaleString()} MXN
               </Typography>
             </Box>
           )}
